@@ -10,7 +10,7 @@ exports.downloadImage = async (bucket, url) => {
       Bucket: bucket,
       Key: url,
     };
-    var origimage = await s3.getObject(params).promise();
+    let origimage = await s3.getObject(params).promise();
     origimage.responseType = "arraybuffer";
     return Buffer.from(origimage.Body, "binary");
   } catch (error) {
@@ -26,7 +26,7 @@ exports.resize = async (buf, width, height,path) => {
       .toBuffer((err, buffer) => (err ? reject(err) : resolve(buffer)));
   });
 };
-exports.waterMark = async(buf,width,height)=>{
+exports.waterMark = async(buf)=>{
   return new Promise((resolve, reject) => {
     gm(buf)
     .gravity('SouthEast')
